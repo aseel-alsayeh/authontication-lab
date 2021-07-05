@@ -23,6 +23,9 @@ db.once('open', function () {
   console.log('Connected');
 });
 
+userModel.remove({}, ()=>{
+  console.log("userModel was removed")
+})
 const bookone = new booksModel({
   name: 'how to lie with statistics',
   description:
@@ -75,6 +78,7 @@ app.get('/authorize', (req, res) => {
 });
 
 app.get('/books', (req, res) => {
+
   userModel.find(function (err, user) {
     if (err) return res.json(err);
     res.json(user);
