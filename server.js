@@ -2,12 +2,21 @@
 
 require('dotenv').config();
 const express = require('express');
+const mongoose=require('mongoose');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 8080;
+const userModel =require('./models/User.model')
+const booksModel =require('./models/Books.model')
+
+
+
+mongoose.connect('mongodb://localhost:27017/user',
+    { useNewUrlParser: true, useUnifiedTopology: true }
+);
 
 
 const client = jwksClient({
