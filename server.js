@@ -24,29 +24,34 @@ db.once('open', function () {
 });
 
 const {
-  
   createBook,
-}=require('./controllers/Book.controller');
+  deleteBook,
+  updateBook,
+} = require('./controllers/Book.controller');
 
-userModel.remove({}, ()=>{
-  console.log("userModel was removed")
-})
+userModel.remove({}, () => {
+  console.log('userModel was removed');
+});
+
 const bookone = new booksModel({
   name: 'how to lie with statistics',
   description:
     'How to Lie with Statistics is a book written by Darrell Huff in 1954 presenting an introduction to statistics for the general reader. Not a statistician, Huff was a journalist who wrote many "how to" articles as a freelancer.',
   status: true,
+  id: '1',
 });
 const booktwo = new booksModel({
   name: 'Mein Kampf',
   description:
     'Mein Kampf (German: [maɪn ˈkampf]; My Struggle or My Fight) is a 1925 autobiographical manifesto by Nazi Party leader Adolf Hitler.',
   status: false,
+  id: '2',
 });
 const bookthree = new booksModel({
   name: 'Harry Potter',
   description: `Harry Potter and the Philosophers Stone is a fantasy novel written by British author J. K. Rowling `,
   status: true,
+  id: '3',
 });
 
 // bookone.save();
@@ -83,20 +88,16 @@ app.get('/authorize', (req, res) => {
 });
 
 app.get('/books', (req, res) => {
-
   userModel.find(function (err, user) {
     if (err) return res.json(err);
     res.json(user);
   });
 });
 
-app.post('/books',(req,res)=>{
-      const data=req.body
-      res.send(data);
-  })
+app.post('/books', createBook);
 
-app.post('/books',createBook);
+app.delete('/books/:id', deleteBook);
 
+app.put('/books/:id', updateBook);
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
-
