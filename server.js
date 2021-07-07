@@ -23,6 +23,11 @@ db.once('open', function () {
   console.log('Connected :)');
 });
 
+const {
+  
+  createBook,
+}=require('./controllers/Book.controller');
+
 userModel.remove({}, ()=>{
   console.log("userModel was removed")
 })
@@ -85,4 +90,13 @@ app.get('/books', (req, res) => {
   });
 });
 
+app.post('/books',(req,res)=>{
+      const data=req.body
+      res.send(data);
+  })
+
+app.post('/books',createBook);
+
+
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
+
