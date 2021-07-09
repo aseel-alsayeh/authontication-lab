@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8080;
 const userModel = require('./models/User.model');
 const booksModel = require('./models/Books.model');
 
-mongoose.connect('mongodb://localhost:27017/user', {
+mongoose.connect('mongodb+srv://saif:saq95317@cluster0.kgujx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
