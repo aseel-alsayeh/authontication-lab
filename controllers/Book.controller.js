@@ -69,14 +69,6 @@ const updateBook = (req, res) => {
 
     user.books.splice(x, 0, newBook);
 
-    // user.books = user.books.map((book) => {
-    //   if (book.id === req.params.id) {
-    //     book.name = name;
-    //     book.description = description;
-    //   }
-    //   return book;
-    // });
-
     user.save();
 
     res.json(user);
