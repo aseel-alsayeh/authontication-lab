@@ -53,13 +53,29 @@ const updateBook = (req, res) => {
       res.send(error);
     }
 
-    user.books = user.books.map((book) => {
-      if (book.id === req.params.id) {
-        book.name = name;
-        book.description = description;
-      }
-      return book;
+    let x = 0;
+
+    user.books = user.books.filter((book, i) => {
+      book.id === req.params.id ? (x = i) : 0;
+      return book.id !== req.params.id;
     });
+
+    const newBook = new booksModel({
+      name: name,
+      description: description,
+      status: true,
+      id: req.params.id,
+    });
+
+    user.books.splice(x, 0, newBook);
+
+    // user.books = user.books.map((book) => {
+    //   if (book.id === req.params.id) {
+    //     book.name = name;
+    //     book.description = description;
+    //   }
+    //   return book;
+    // });
 
     user.save();
 

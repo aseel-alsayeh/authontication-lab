@@ -1,7 +1,6 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const booksModel = require('./Books.model');
 
 const userSchema = new mongoose.Schema({
   email: { type: String },
